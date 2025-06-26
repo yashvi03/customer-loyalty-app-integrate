@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Welcome, {{session["name"]}} {{session["surname"]}}!</h2>
+                    {% if notif %}
+                        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+                    {% endif %}
+                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+                    {% if redeem %}
+                    <h4 class="card-title">Pending Gift Requests</h4>
+                    <div class="table-responsive">
+                        <input type="text" class="form-control" id="plumber_i" onkeyup="plumber_filter()" placeholder="Search by plumber name.." style="width: 100%;">
+                        <br>
+                        <input type="text" class="form-control" id="trader_i" onkeyup="trader_filter()" placeholder="Search by dealer name.." style="width: 100%;">
+                        <br>
+                        <table class="table user-table no-wrap" id="redeem">
+                            <thead>
+                                <tr>
+                                    <th class="border-top-0">Date</th>
+                                    <th class="border-top-0">Plumber</th>
+                                    <th class="border-top-0">Phone</th>
+                                    <th class="border-top-0">Store</th>
+                                    <th class="border-top-0">Gift</th>
+                                    <th class="border-top-0">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in redeem %}
+                                <tr>
+                                    <td>{{ row[1] }}</td>
+                                    <td><a href="/plumber_profile/{{ row.plumber_id }}">{{ row.name }} {{ row.surname }}</a></td>
+                                    <td>{{ row.phone }}</td>
+                                    <td><a href="/trader_profile/{{ row.trader_id }}">{{ row.store_name }}</a></td>
+                                    <td>{{ row.gift }} for {{ row.points }} points</td>
+                                    <td>
+                                        <ul>
+                                            <a type="submit" href="/approve/{{ row.id }}">Approve</a>
+                                        </ul>
+                                        <ul>
+                                            <a type="submit" href="/reject/{{ row.id }}">Reject</a>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+</div>
+
+<script>
+    function plumber_filter() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("plumber_i");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("redeem");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+        }
+    }
+
+    function trader_filter() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("trader_i");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("redeem");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            } else {
+            tr[i].style.display = "none";
+            }
+        }
+        }
+    }
+</script>
+{% endblock %}   

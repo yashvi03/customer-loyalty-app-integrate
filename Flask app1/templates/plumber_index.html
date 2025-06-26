@@ -1,0 +1,404 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid" style="box-sizing: border-box;">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <a href="/plumber_profile/{{ session['user_id'] }}" class="text-dark text-center">
+                <h3 class="text-dark text-center">{{ session["name"] }} {{ session["surname"] }}!</h3>
+            </a>
+            {% if notif %}
+                <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+            {% endif %}
+
+            <div class="row">
+                
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000" data-wrap="true">
+                            <div class="carousel-inner">
+                                {% for i in recipients %}
+                                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                        <img src="{{ url_for('download', filename=i.6) }}" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                        <div class="text-center text-dark">
+                                            <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                            <h5>Shri {{ i.8 }} {{ i.9 }}</h5>
+                                            <!-- <h6 class="text-muted">{{ i.11 }}, {{ i.12 }}</h6> -->
+                                            <h6 class="text-info">{{ i.3 }}</h6>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <!-- <div class="carousel-item active">
+                                    <img src="uploads/Arum Kumar Sahu Stainless.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Arun Kumar Sahu</h5>
+                                        <h6 class="text-muted">Gaurav Hardware & Paints, Indore</h6>
+                                        <h6 class="text-info">Stainless Steel Dinner Set, 50 pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Gajendra Jatav Milton.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Gajendra Jatav</h5>
+                                        <h6 class="text-muted">Jai Bajrang Building Material, Kailaras</h6>
+                                        <h6 class="text-info">Milton Steel Lunch Box 4 pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Suraj Dhakad Milton.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Suraj Dhakad</h5>
+                                        <h6 class="text-muted">Jai Bajrang Building Material, Kailaras</h6>
+                                        <h6 class="text-info">Milton Steel Lunch Box 4 pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Banti ji  Taparia 205mm.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Bantiji</h5>
+                                        <h6 class="text-muted">Jai Bajrang Building Material, Kailaras</h6>
+                                        <h6 class="text-info">Taparia 205mm Adjustable Spanner Wrench</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Vinod Talaya Philips I.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Vinod Talaya</h5>
+                                        <h6 class="text-muted">Nikhil Traders, Hatpipliya</h6>
+                                        <h6 class="text-info">Philips Induction Cooking Plate</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Aayush Patidar Vivo.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Aayush Patidar</h5>
+                                        <h6 class="text-muted">Anup Enterprises, Kukshi</h6>
+                                        <h6 class="text-info">Vivo Y1s 3GB: 32GB Smartphone</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Dhaniram Verma Bajaj.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Dhaniram Verma</h5>
+                                        <h6 class="text-muted">Shri Traders, Jhansi</h6>
+                                        <h6 class="text-info">Bajaj 17liter Microwave Oven & Stainless Steel Dinner Set 50 Pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Majar ali Stainless.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Majar Ali</h5>
+                                        <h6 class="text-muted">Balaji Traders, Agarmalwa</h6>
+                                        <h6 class="text-info">Stainless Steel Dinner Set, 50 pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Angad Singh Chouhan  Tapariya.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Angad Singh Chouhan</h5>
+                                        <h6 class="text-muted">Gupta Sanitary Stores, Dabra</h6>
+                                        <h6 class="text-info">Tapariya 31 pcs ScrewDriver & Pipe Wrench Pana</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Shshudin Multani Bosch.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Shshudin Multani</h5>
+                                        <h6 class="text-muted">Balaji Traders, Agarmalwa</h6>
+                                        <h6 class="text-info">Bosch Hand Toolkit 12pcs</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Gaurav Rathore Gift Philips.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Gaurav Rathore</h5>
+                                        <h6 class="text-muted">Subhash Electric, Meghnagar</h6>
+                                        <h6 class="text-info">Philips Iron</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Rahul Rathore Gift power.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Rahul Rathore</h5>
+                                        <h6 class="text-muted">Sagarmal Nathulal Jain, Barod</h6>
+                                        <h6 class="text-info">Power Bank 20000 mAh</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Kalka Plumber Boat.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Kalka Plumber</h5>
+                                        <h6 class="text-muted">Shri Guru Karshnik Iron Store, Lahar</h6>
+                                        <h6 class="text-info">Boat Rockerz 255 Bluetooth Neckband Earphone</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Fayyaj khan khan Prestige.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Fayyaj Khan</h5>
+                                        <h6 class="text-muted">Prem Machinary Stores, Khilchipur</h6>
+                                        <h6 class="text-info">Prestige Sandwich Maker & Boat Bluetooth Earphone</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Manohar verma Vivo.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Manohar Verma</h5>
+                                        <h6 class="text-muted">Gaurav Sanitation, Sanwer</h6>
+                                        <h6 class="text-info">Vivo V19i 3GB 32GB Smartphone</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Sandeep Goswami Portable Bluetooth Speaker.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Sandeep Goswami</h5>
+                                        <h6 class="text-muted">Babashri Enterprises, Sanawad</h6>
+                                        <h6 class="text-info">Portable Bluetooth Speaker</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Raju Mali Bosch X50.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Raju Mali</h5>
+                                        <h6 class="text-muted">Fatemi Enterprises, Jaora</h6>
+                                        <h6 class="text-info">Bosch X50 Ti Drill Bit Set 50 Pieces</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Manish Gupta Portable Bluetooth.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Manish Gupta</h5>
+                                        <h6 class="text-muted">Shri Guru Karshnik Iron Store, Lahar</h6>
+                                        <h6 class="text-info">Portable Speaker & Taparia Adjustable Spanner</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Mukesh Malakar Boat Bassheads.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Mukesh Malakar</h5>
+                                        <h6 class="text-muted">Prem Machinery Store, Khilchipur</h6>
+                                        <h6 class="text-info">Boat Bassheads 100 Wired Earphone</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Vijay Choudhary Pipe cutter.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Vijay Choudhary</h5>
+                                        <h6 class="text-muted">Songare Sanitary & Hardware, Bagdi</h6>
+                                        <h6 class="text-info">Pipe Cutter</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Ram kumar Portable Bluetooth.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Ram Kumar</h5>
+                                        <h6 class="text-muted">Shri Guru Karshnik Iron Store, Lahar</h6>
+                                        <h6 class="text-info">Portable Bluetooth Speaker</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Sazid khan Boat rockerz.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Sazid Khan</h5>
+                                        <h6 class="text-muted">Shri Guru Karshnik Iron Store, Lahar</h6>
+                                        <h6 class="text-info">Boat Earphone & Milton Steel Lunch Box</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Amit Lobaniya watch.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Amit Lobaniya</h5>
+                                        <h6 class="text-muted">Gaurav Sanitation, Sanwer</h6>
+                                        <h6 class="text-info">Mi Band 5 Smart Watch</h6>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="uploads/Manohar verma dinner set.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Manohar Verma</h5>
+                                        <h6 class="text-muted">Gaurav Sanitation, Sanwer</h6>
+                                        <h6 class="text-info">Stainless Steel Dinner Set, 50 pcs</h6>
+                                    </div>
+                                </div> 
+                                <div class="carousel-item">
+                                    <img src="uploads/Gaurav Amrit Rathore_speaker.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Gaurav Amrit Rathore</h5>
+                                        <h6 class="text-muted">Subhas Electric, Meghnagar</h6>
+                                        <h6 class="text-info">Portable Bluetooth Speaker</h6>
+                                    </div>
+                                </div> 
+                                <div class="carousel-item">
+                                    <img src="uploads/Kulwant sigh ritariya_allenkey.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Kulwant Singh Ritariya</h5>
+                                        <h6 class="text-muted">Maa Vaishno Sanitary & Hardware, Gwalior</h6>
+                                        <h6 class="text-info">Taparia Allen Key Set</h6>
+                                    </div>
+                                </div> 
+                                <div class="carousel-item">
+                                    <img src="uploads/Jitendra goyal_headphone.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Jitendra Goyal</h5>
+                                        <h6 class="text-muted">Maa Vaishno Sanitary & Hardware, Gwalior</h6>
+                                        <h6 class="text-info">boAt Rockerz 255 Bluetooth Neckband Earphones</h6>
+                                    </div>
+                                </div> 
+                                <div class="carousel-item">
+                                    <img src="uploads/Ramaji_Cutter.jpeg" class="d-block w-100" style="object-fit: contain; width: auto; height: 300px !important;">
+                                    <div class="text-center text-dark">
+                                        <h6 class="text-success" style="text-align: center; font-family: 'Kalam', serif; font-size: 22px;">बधाईयां!</h6>
+                                        <h5>Shri Rama Ji</h5>
+                                        <h6 class="text-muted">Ekdant Hardware & Sanitary, Indore</h6>
+                                        <h6 class="text-info">Pipe Cutter</h6>
+                                    </div>
+                                </div>  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <a href="/leaderboard" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center" style="text-align: center; font-family: 'Kalam', serif; padding-top: 10px;">रैंक</h4>
+                                <div class="text-right">
+                                    <h2 class="font-light m-b-0 text-center" style="text-align: center; padding-top: 0px; font-size: 30px;">{{ rank }}</h2>
+                                </div>
+                                <p class="text-center" style="color: goldenrod; text-align: center; font-family: 'Kalam', serif; font-size: 20px;">टौप प्लंबर देखें</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="/ledger" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center" style="text-align: center; font-family: 'Kalam', serif; padding-top: 10px;">कुल</h4>
+                                <div class="text-right">
+                                    <h2 class="font-light m-b-0 text-center" style="text-align: center; padding-top: 0px; font-size: 30px;"><i class="ti-arrow-up text-success text-center"></i>{{ available }}</h2>
+                                    <p class="text-muted text-center" style="text-align: center; font-family: 'Kalam', serif;">पौइंट्स</p>
+                                </div>
+                                <p class="text-success text-center" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">पॉइंट लेज़र देखें</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-sm-6">
+                    <a href="/gifts" class="custom-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title text-center" style="text-align: center; font-family: 'Kalam', serif; padding-top: 10px;">पुरस्कार के लिए</h4>
+                                <div class="text-right">
+                                    <h2 class="font-light m-b-0 text-center" style="text-align: center; padding-top: 0px; font-size: 30px;"><i class="ti-arrow-up text-info text-center"></i>{{ allocated }}</h2>
+                                    <p class="text-muted text-center" style="text-align: center; font-family: 'Kalam', serif;">पौइंट्स</p>
+                                </div>
+                                <p class="text-info text-center" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">पुरस्कार मांगें</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-sm-12"> -->
+    {% if gift_status %}
+        <h3 class="text-dark text-center" style="font-family: 'Kalam', serif; font-size: 30px;">पुरस्कार की स्थिति</h3>
+        <!-- <div class="row" style="vertical-align: top;"> -->
+            {% for row in gift_status %}
+                <!-- <div class="col-sm-6"> -->
+                    <div class="card">
+                        <!-- <div class="card-body"> -->
+                            <table class="table user-table" style="table-layout: fixed;" id="gifts">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">दिनांक</th>
+                                        <th class="border-top-0" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">पुरस्कार</th>
+                                        <th class="border-top-0" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">स्थिति</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ row.date }}</td>
+                                        <td>{{ row.gift }}</td>
+                                        {% if row.status == "APPLIED" %}
+                                            <td style="color: royalblue">{{ row.status }}</td>
+                                        {% elif row.status == "REJECTED" %}
+                                            <td style="color: red">{{ row.status }}</td>
+                                        {% else %}
+                                            <td style="color: green">{{ row.status }}</td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <!-- </div> -->
+                    </div>
+                <!-- </div> -->
+            {% endfor %}
+        <!-- </div> -->
+    {% endif %}
+</div>
+
+<script>
+    $('.carousel').on('touchstart', function(event){
+    const xClick = event.originalEvent.touches[0].pageX;
+    $(this).one('touchmove', function(event){
+        const xMove = event.originalEvent.touches[0].pageX;
+        const sensitivityInPx = 5;
+
+        if( Math.floor(xClick - xMove) > sensitivityInPx ){
+            $(this).carousel('next');
+        }
+        else if( Math.floor(xClick - xMove) < -sensitivityInPx ){
+            $(this).carousel('prev');
+        }
+    });
+    $(this).on('touchend', function(){
+        $(this).off('touchmove');
+    });
+});
+</script>
+
+{% endblock %}   

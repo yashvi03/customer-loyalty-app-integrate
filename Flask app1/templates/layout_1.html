@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Puranmal Sons : {% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="static/styles.css">
+    <!-- Our Custom JS -->
+    <script src="/static/js/custom.js"></script>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-light bg-light navbar-full">
+        <!-- Navbar Container -->
+    
+            <!-- Navbar Header [contains both toggle button and navbar brand] -->
+            <div class="navbar-header justify-content-end">
+                
+                <!-- Navbar Brand -->
+                <a href="/" class="navbar-brand">
+                    <b class="logo-icon">
+                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                        <!-- Dark Logo icon -->
+                        <img src="/static/logo2.png" alt="homepage" class="dark-logo">
+
+                    </b>
+                    <!--End Logo icon -->
+                    <!-- Logo text -->
+                    <span class="logo-text">
+                        
+                        <img src="/static/name3.png" alt="homepage" class="dark-logo">
+                        <!-- Puranmal Sons Plumbing Network -->
+                    </span>
+                </a>
+
+                <!-- Toggle Button [handles opening navbar components on mobile screens]-->
+                <button type="button" id="sidebarCollapse" class="navbar-toggler collapsed hidden-sm-up" data-toggle="collapse" data-target="#sidebar" aria-expanded"false">
+                    <i class="fas fa-align-right"></i>
+                </button>
+    
+            </div>
+    </nav>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        {% if session.user_id %}
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Puranmal Sons</h3>
+                <h4>Plumbing Network</h4>
+            </div>
+            <ul class="list-unstyled components" class="in">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                
+                {% block sidebar %}{%endblock%}
+                <li class="sidebar-item">
+                    {% if session["type"] == 1 %}
+                        <a href="/trader_profile/{{ session['user_id'] }}">{{ session["name"] }} {{ session["surname"] }}</a>
+                    {% elif session["type"] == 2 %}
+                        <a href="/plumber_profile/{{ session['user_id'] }}">{{ session["name"] }} {{ session["surname"] }}</a>
+                    {% endif %}
+                </li>
+                <li class="sidebar-item">
+                    <a href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+        
+        
+        <!-- Page Content -->
+        <div id="content">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+
+        
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+
+        });
+    </script>
+</body>
+
+</html>

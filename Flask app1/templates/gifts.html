@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <!-- <div class="container-fluid"> -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <br>
+        {% if session["type"] == 1 %}
+        <h3 class="text-dark text-center">Gifts</h3>
+        {% elif session["type"] == 2 %}
+        <h3 class="text-dark text-center" style="font-family: 'Kalam', serif; font-size: 30px;">पुरस्कार</h3>
+        <h4 class="text-dark text-center" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px; color: #ff0000;">आपके पौइंट्स : {{ available }}</h4>
+        {% endif %}
+        <div class="row">
+            <!-- column -->
+            {% if session["type"] == 2 %}
+                {% for row in gifts %}
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table user-table" style="table-layout: fixed;" id="gifts">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0" style="font-family: 'Kalam', serif; font-size: 20px;">पौइंट्स</th>
+                                                <th class="border-top-0" style="font-family: 'Kalam', serif; font-size: 20px;">पुरस्कार</th>
+                                                {% if session["type"] == 0 %}
+                                                    <th class="border-top-0">Actions</th>
+                                                {% elif session["type"] == 2 %}
+                                                    <th class="border-top-0"></th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <img src="{{ url_for('download', filename=image_type(row.image)) }}" class="center" style="max-width: 100%; max-height: 150px">
+                                            <tr>
+                                                <td>{{ row.points }}</td>
+                                                <td>{{ row.gift }}</td>
+                                                {% if plumber.redeem_status != "APPLIED" %}
+                                                    {% if redeemable >= row.points %}
+                                                        <td>
+                                                            <form action="/redeem/{{ row.id }}" method="POST" class="form-horizontal form-material">
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="points" value="{{ row.points }}">
+                                                                    <input type="submit" id="claim_gift" value="पुरस्कार मांगें" class="btn btn-success text-white" style="white-space: normal; font-family: 'Kalam', serif; font-size: 15px; padding-top: 9px;">
+                                                                </div>
+                                                            </form>
+                                                        </td>
+                                                    {% elif available >= row.points and redeemable < row.points %}
+                                                        <td style="color: blue; font-family: 'Kalam', serif;">
+                                                            इतने पौइंट्स एक्टीवेट नहीं हैं।
+                                                        </td>
+                                                    {% else %}
+                                                        <td style="color:red; font-family: 'Kalam', serif;">
+                                                            इतने पौइंट्स नहीं हैं।
+                                                        </td>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <td style="font-family: 'Kalam', serif;">आपके एक पुरस्कार का अनुरोध पेंडिंग है।</td>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    {% if available < row.points %}
+                                        <span class="text-info" style="font-family: 'Kalam', serif;">इस पुरस्कार के लिए आपको {{ row.points - available }} पौइंट्स और चाहिये।</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: {{ (((available)/row.points)*100)|round|int }}%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% elif session["type"] == 0 or session["type"] == 3 %}
+
+            <div class="col-sm-12">
+                <!-- <div class="card"> -->
+                    <div class="card-body">
+                        
+                        <div class="table-responsive">
+                            <table class="table user-table" id="gifts">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Points</th>
+                                        <th class="border-top-0">Gift</th>
+                                        {% if session["type"] == 0 or session["type"] == 2 %}
+                                            <th class="border-top-0">Actions</th>
+                                        {% endif %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in gifts %}
+                                        <tr>
+                                            <td>{{ row.points }}</td>
+                                            <td>{{ row.gift }}</td>
+                                            <td>
+                                                <a href="/delete/{{ row.id }}">Delete</a>
+                                                <br>
+                                                <a href="/update/{{ row.id }}">Update</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <form action="/gifts" method="POST" class="form-horizontal form-material">
+                            <h4>Add New Gift</h4>
+                            <div class="form-group">
+                                <input placeholder="Points" type="number" name="points" id="points" class="form-control pl-0 form-control-line">
+                            </div>
+                            <div class="form-group">
+                                <input placeholder="Gift" type="text" name="gift" id="gift" class="form-control pl-0 form-control-line">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Add Gift" class="btn btn-success mx-auto mx-md-0 text-white">
+                            </div>
+                        </form>
+                    </div>
+                <!-- </div> -->
+            </div>
+        
+            {% elif session["type"] == 1 %}
+                {% for row in gifts %}
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table user-table" style="table-layout: fixed;" id="gifts">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0">Points</th>
+                                                <th class="border-top-0">Gift</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <img src="{{ url_for('download', filename=image_type(row.image)) }}" class="center" style="max-width: 100%; max-height: 150px">
+                                            <tr>
+                                                <td>{{ row.points }}</td>
+                                                <td>{{ row.gift }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    <!-- </div> -->
+{% endblock %}   

@@ -1,0 +1,201 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <!-- <div class="card"> -->
+                            <div class="card-body profile-card">
+                                <center class="m-t-30"> 
+                                    {% if profile.profile_photo %}
+                                        <img src="{{ url_for('download', filename=profile.profile_photo) }}" class="rounded-circle" width="150">
+                                    {% endif %}
+                                    <h4 class="card-title m-t-10">{{ profile.name }} {{ profile.surname }}</h4>
+                                    <h6 class="card-subtitle">{{ profile.city }}</h6>
+                                    <div class="row justify-content-center">
+                                        {% if not profile.store_name %}
+                                            <div class="col-4">
+                                                <span class="font-normal">Received:</span>
+                                                <br>
+                                                <span class="font-normal">{{ received }}</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="font-normal">Redeemable:</span>
+                                                <br>
+                                                <span class="font-normal">{{ redeemable }}</span>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-4">
+                                                <span class="font-normal">Available:</span>
+                                                <br>
+                                                <span class="font-normal">{{ available }}</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="font-normal">Distributed:</span>
+                                                <br>
+                                                <span class="font-normal">{{ used }}</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="font-normal">Expired:</span>
+                                                <br>
+                                                <span class="font-normal">{{ expired }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </center>
+                                <form action="/ledger" method="post">
+                                    <div class="form-group">
+                                        <input hidden class="form-control" name="session_id" value="{{ profile.id }}">
+                                        {% if plumbers %}
+                                            <input hidden class="form-control" name="session_type" value="1">
+                                            <input hidden class="form-control" name="subdealer" value="{{ profile.is_subdealer }}">
+                                        {% elif traders %}
+                                            <input hidden class="form-control" name="session_type" value="2">
+                                        {% endif %}
+                                    </div>
+                                    <input class="btn btn-primary" type="submit" value="View Ledger">
+                                </form>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <!-- <div class="card"> -->
+                            <div class="card-body">
+                                <form class="form-horizontal form-material">
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Full Name</label>
+                                        <div class="col-md-12">
+                                            <strong class="form-control pl-0 form-control-line">{{ profile.name }} {{ profile.surname }}</strong>
+                                        </div>
+                                    </div>
+                                    {% if profile.store_name %}
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Store Name</label>
+                                            <div class="col-md-12">
+                                                <strong class="form-control pl-0 form-control-line">{{ profile.store_name }}</strong>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-group">
+                                        <label for="example-email" class="col-md-12">Address</label>
+                                        <div class="col-md-12">
+                                            <strong class="form-control pl-0 form-control-line">{{ profile.address }}</strong>
+                                            <br>
+                                            <strong class="form-control pl-0 form-control-line">{{ profile.city }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12 mb-0">Phone No</label>
+                                        <div class="col-md-12">
+                                            <strong class="form-control pl-0 form-control-line">{{ profile.phone }}</strong>                                        
+                                            <a href="/request_OTP">Change Phone Number</a>
+                                        </div>
+                                    </div>
+                                    {% if profile.dob %}
+                                        <div class="form-group">
+                                            <label class="col-md-12 mb-0">Date of Birth</label>
+                                            <div class="col-md-12">
+                                                <strong class="form-control pl-0 form-control-line">{{ profile.dob }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Date of Anniversary</label>
+                                            <div class="col-sm-12">
+                                                <strong class="form-control pl-0 form-control-line">{{ profile.doa }}</strong>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <!-- Column -->
+                    {% if plumbers and plumbers != "no_plumbers_registered" %}
+                        <div class="col-sm-12">
+                            <!-- <div class="card"> -->
+                                <div class="card-body">
+                                    <h4 class="text-dark text-center">Associated Plumbers</h4>
+                                    <div class="table-responsive">
+                                        <table class="table user-table" id="plumbers">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">Name</th>
+                                                    <th class="border-top-0">Phone</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for row in plumbers %}
+                                                    <tr>
+                                                        <td><a href="/plumber_profile/{{ row.id }}" style="font-weight: bold;">{{ row.name }} {{ row.surname }}</a></td>
+                                                        <td>{{ row.phone }}</td>
+                                                    </tr>
+                                                    <tr style="border-bottom: 3px solid;">
+                                                        <td>Received: {{ plumber_received(row.id) }}</td>
+                                                        <td style="color: green;">Activated: {{ plumber_activated(row.id) }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    {% endif %}
+                    {% if traders %}
+                        <div class="col-sm-12">
+                            <!-- <div class="card"> -->
+                                <div class="card-body">
+                                    <h4 class="text-dark text-center">Associated Dealers</h4>
+                                    <div class="table-responsive">
+                                        <table class="table user-table" id="traders">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-top-0">Name</th>
+                                                    <th class="border-top-0">Phone</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for row in traders %}
+                                                    <tr>
+                                                        {% if session["type"] == 3 %}
+                                                            <td><a href="/trader_profile/{{ row.id }}" style="font-weight: bold;">{{ row.store_name }}</a></td>
+                                                        {% else %}
+                                                            <td>{{ row.store_name }}</td>
+                                                        {% endif %}
+                                                        <td>{{ row.phone }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+{% endblock %}   

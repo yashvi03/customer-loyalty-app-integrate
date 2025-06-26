@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <br>
+            <h3 class="text-dark text-center">Dealer Material Return</h3>
+            <form enctype=multipart/form-data action="/sales_return_subdealer" method="post">
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="subdealer" data-live-search="true" required>
+                        <option disabled selected value>Select Dealer</option>
+                        {% for sd in subdealers %}
+                            <option value="{{ sd.id }}" style="
+                            /* wrap text in compatible browsers */
+                            -moz-white-space: pre-wrap;
+                            -o-white-space: pre-wrap;
+                            white-space: pre-wrap;
+                            /* hide text that can't wrap with an ellipsis */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            /* add border after every option */
+                            border-bottom: 1px solid #DDD;
+                            ">{{ sd.store_name }} {{ sd.phone}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input autocomplete="off" class="form-control" name="amount" onkeyup="calc()" placeholder="Bill Amount" type="number" min="0" id="amount" required>
+                </div>
+                <div class="form-group">
+                    <input autocomplete="off" class="form-control" name="points" placeholder="Points" type="number" id="points" max="{{ max_points }}" required>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Submit Return">
+                </div>
+            </form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            var amount = document.getElementById('amount').value;
+            
+            document.getElementById('points').value = Math.floor(amount * 0.0230909);
+        }    
+    </script>
+{% endblock %}

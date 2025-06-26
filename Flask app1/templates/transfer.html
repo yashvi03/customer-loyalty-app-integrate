@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <br>
+                <h3 class="text-dark text-center">Transfer Points</h3>
+                <div class="card">
+                    <div class="card-body" style="padding: 1.25rem;">
+                        <form enctype=multipart/form-data action="/transfer" method="post">
+                            <div class="form-group">
+                                <select class="selectpicker form-control" name="plumber" data-live-search="true" required>
+                                    <option disabled selected value>Select Plumber</option>
+                                    {% for plumber in plumbers %}
+                                        <option value="{{ plumber.id }}" style="
+                                        /* wrap text in compatible browsers */
+                                        -moz-white-space: pre-wrap;
+                                        -o-white-space: pre-wrap;
+                                        white-space: pre-wrap;
+                                        /* hide text that can't wrap with an ellipsis */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        /* add border after every option */
+                                        border-bottom: 1px solid #DDD;
+                                        ">{{ plumber.name }} {{ plumber.surname }} {{ plumber.phone}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% if session["subdealer"] %}
+                                <div class="form-group">
+                                    <input autocomplete="off" class="form-control" name="amount" onkeyup="calc1()" placeholder="Bill Amount" type="number" min="0" id="amount" required>
+                                </div>
+                                <div class="form-group">
+                                    <input autocomplete="off" class="form-control" name="points" placeholder="Points" type="number" id="points" max="{{ max_points }}" required>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <input autocomplete="off" class="form-control" name="amount" onkeyup="calc()" placeholder="Bill Amount" type="number" min="0" id="amount" required>
+                                </div>
+                                <div class="form-group">
+                                    <input autocomplete="off" class="form-control" name="points" placeholder="Points" type="number" id="points" max="{{ max_points }}" required>
+                                </div>
+                            {% endif %}
+                            <!-- <div class="form-group"> -->
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                            <!-- </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            var amount = document.getElementById('amount').value;
+            
+            document.getElementById('points').value = Math.floor(amount * 0.02119);
+        }    
+    </script>
+
+    <script>
+        function calc1() {
+            var amount = document.getElementById('amount').value;
+            
+            document.getElementById('points').value = Math.floor(amount * 0.0195686);
+        }    
+    </script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if session["type"] == 1 %}
+        <h2>Welcome, {{session["store_name"]}}!</h2>
+    {% elif session["type"] == 2 %}
+        <h2>Welcome, {{ session["name"] }} {{ session["surname"] }}!</h2>
+    {% endif %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/update/{{ gift.id }}" method="POST" class="form-horizontal form-material">
+                            <h4>Update Gift</h4>
+                            <div class="form-group">
+                                <input placeholder="Points" type="number" value="{{ gift.points }}" name="points" id="points" class="form-control pl-0 form-control-line">
+                            </div>
+                            <div class="form-group">
+                                <input placeholder="Gift" type="text" value="{{ gift.gift }}" name="gift" id="gift" class="form-control pl-0 form-control-line">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Update Gift" class="btn btn-success mx-auto mx-md-0 text-white">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+{% endblock %}   

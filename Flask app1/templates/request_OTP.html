@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-dark text-center">Enter Phone Number</h3>
+                        <form action="/request_OTP" method="post">
+                            <div class="form-group">
+                                <input autocomplete="off" autofocus class="form-control" name="phone" placeholder="Phone Number" type="number">
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Get OTP">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

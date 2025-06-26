@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <h3 class="text-dark text-center">Welcome, {{ session["name"] }} {{ session["surname"] }}!</h3>
+            {% if notif %}
+                <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Traders</h4>
+                            <div class="text-center">
+                                <h2 class="font-light m-b-0 text-center"><i class="ti-arrow-up text-success text-center"></i>{{ tr_count }}</h2>
+                                <select id="tr_id" class="selectpicker form-control" style="width: 100%;" data-live-search="true" data-show-subtext="true" required>
+                                    <option disabled selected>Select Trader</option>
+                                    {% for trader in traders %}
+                                        <option value="{{ trader.id }}" data-subtext="{{ trader.city }}" style="
+                                            width: 100%;
+                                          ">{{ trader.store_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <input id="tr_search" class="btn btn-primary" type="submit" value="View Profile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Plumbers</h4>
+                            <div class="text-right">
+                                <h2 class="font-light m-b-0 text-center"><i class="ti-arrow-up text-info text-center"></i>{{ pl_count }}</h2>
+                                <select id="pl_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <option disabled selected>Select Plumber</option>
+                                    {% for plumber in plumbers %}
+                                    <option value="{{ plumber.id }}" style="
+                                    width: 100%;
+                                  ">{{ plumber.name }} {{ plumber.surname }}, {{ plumber.city }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <input id="pl_search" class="btn btn-primary" type="submit" value="View Profile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Update Database</h4>
+                            <div class="text-center">
+                                <button onclick="location.href='/update_db'" class="btn btn-primary">Update Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        $('#tr_search').click(function(e) {  
+            var inputvalue = $("#tr_id").val();
+            window.location.replace("/trader_profile/"+inputvalue);
+
+        });
+    });
+
+    $(document).ready(function(){
+
+        $('#pl_search').click(function(e) {  
+            var inputvalue = $("#pl_id").val();
+            window.location.replace("/plumber_profile/"+inputvalue);
+
+        });
+    });
+</script>
+{% endblock %}   

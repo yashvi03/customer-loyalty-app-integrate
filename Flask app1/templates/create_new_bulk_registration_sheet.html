@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+{% if notif %}
+    <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+{% endif %}
+
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">New Bulk Registration Sheet</h4>
+                    
+                    <div class="form-group">
+                        <label for="sheet_url">Google Sheet URL:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="sheet_url" name="sheet_url" value="{{ sheet_url }}" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="copyButton">Copy URL</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <form action="/upload_bulk_registration_sheet" method="get">
+                            <button type="submit" class="btn btn-primary">Upload Existing Sheet</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->
+</div>
+
+<script>
+// JavaScript to copy URL to clipboard
+document.getElementById('copyButton').addEventListener('click', function() {
+    var sheetUrl = document.getElementById('sheet_url');
+    sheetUrl.select();
+    document.execCommand("copy");
+    alert("Copied the URL");
+});
+</script>
+
+{% endblock %}

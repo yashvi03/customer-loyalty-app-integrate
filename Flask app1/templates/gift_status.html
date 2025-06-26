@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if session["type"] == 1 %}
+        <h2>Welcome, {{session["store_name"]}}!</h2>
+    {% elif session["type"] == 2 %}
+        <h2>Welcome, {{ session["name"] }} {{ session["surname"] }}!</h2>
+    {% endif %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <!-- <div class="container-fluid"> -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <!-- <div class="card"> -->
+                    <div class="card-body">
+                        <h4>Gift Status</h4>
+                        <div class="table-responsive">
+                            <input type="text" class="form-control" id="plumber_i" onkeyup="plumber_filter()" placeholder="Search by plumber name.." style="width: 100%;">
+                            <br>
+                            <input type="text" class="form-control" id="dealer_i" onkeyup="dealer_filter()" placeholder="Search by dealer name.." style="width: 100%;">
+                            <br>
+                            <table class="table user-table" id="gifts">
+                            <thead>
+                                <tr>
+                                    <th class="border-top-0">Date</th>
+                                    <th class="border-top-0">Plumber</th>
+                                    <th class="border-top-0">Points</th>
+                                    <th class="border-top-0">Gift</th>
+                                    <th class="border-top-0">Status</th>
+                                    <th class="border-top-0">Dealer</th>
+                                    <th class="border-top-0">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in gift_status %}
+                                    <tr>
+                                        <td>{{ row.date }}</td>
+                                        <td><a href="/plumber_profile/{{ row.plumber_id }}">{{ row.name }} {{ row.surname }}</a></td>
+                                        <td>{{ row.points }}</td>
+                                        <td>{{ row.gift }}</td>
+                                        <td style="word-break: break-all;">{{ row.status }}</td>
+                                        <td style="word-break: break-all;"><a href="/trader_profile/{{ row.trader_id }}">{{ row.store_name }}</a></td>
+                                        <td>
+                                            <form action="/disburse/{{ row.id }}" method="POST" class="form-horizontal form-material">
+                                                <div class="form-group">
+                                                    {% if row.status == "APPROVED" %}
+                                                        <input type="submit" value="Delivered" class="btn btn-success mx-auto mx-md-0 text-white">
+                                                    {% endif %}
+                                                </div>
+                                            </form>
+                                            {% if "DELIVERED" in row.status and not row.recipient_image %}
+                                                <form action="/recipient_image/{{ row.id }}" enctype=multipart/form-data method="POST" class="form-horizontal form-material">
+                                                    <div class="form-group">
+                                                        <label for="gift_img">Upload Image: </label>
+                                                        <input type="file" id="gift_img" name="recipient_image" accept="image/*" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input class="btn btn-primary" type="submit" value="Upload">
+                                                    </div>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <br>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    <!-- </div> -->
+
+    <script>
+        function plumber_filter() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("plumber_i");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("gifts");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+
+        function dealer_filter() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("dealer_i");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("gifts");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[5];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+{% endblock %}   

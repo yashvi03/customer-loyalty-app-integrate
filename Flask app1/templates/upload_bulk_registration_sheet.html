@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+{% if notif %}
+    <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+{% endif %}
+
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Upload Bulk Plumber Registration Sheet</h4>
+                    <form id="sheetForm" method="POST" action="/upload_bulk_registration_sheet">
+                        <div class="form-group">
+                            <label for="sheet-url">Google Sheet URL</label>
+                            <input type="url" class="form-control" id="sheet-url" name="sheet_url" placeholder="Google Sheet URL" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->
+</div>
+
+<script>
+document.getElementById('sheetForm').addEventListener('submit', function(event) {
+    var sheetUrl = document.getElementById('sheet-url').value;
+    
+    // Regular expression to validate Google Sheets URL
+    var regex = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+\/edit/;
+    
+    if (!regex.test(sheetUrl)) {
+        event.preventDefault(); // Prevent form submission
+        alert('Please enter a valid Google Sheets URL.');
+    }
+});
+</script>
+
+{% endblock %}

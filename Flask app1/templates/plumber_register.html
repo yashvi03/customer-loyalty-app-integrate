@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+{% if notif %}
+    <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+{% endif %}
+
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Plumber Registration</h4>
+                    <form autocomplete="off" enctype=multipart/form-data action="/plumber_register" method="POST">
+                        <div class="form-group">
+                            <select name="dealer" class="selectpicker form-control" data-live-search="true" required>
+                                <option selected disabled value>Select Dealer</option>
+                                {% for dealer in dealers %}
+                                    <option value="{{ dealer.id }}">{{ dealer.store_name }} {{ dealer.city }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="name" placeholder="First Name" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="surname" placeholder="Surname" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="phone" placeholder="Phone Number" type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <input hidden autocomplete="off" class="form-control" name="address" placeholder="Address" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input hidden autocomplete="off" class="form-control" name="city" placeholder="City" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label hidden for="dob">Birthday:</label>
+                            <input hidden type="date" id="dob" name="dob">
+                        </div>
+                        <div class="form-group">
+                            <label hidden for="doa">Anniversary:</label>
+                            <input hidden type="date" id="doa" name="doa">
+                        </div>
+                        <div class="form-group">
+                            <input hidden id="pass" autocomplete="off" class="form-control" name="password" placeholder="Password" type="password">
+                            <br>
+                            <!-- <input hidden type="checkbox" onclick="ShowPass()">Show Password -->
+                        </div>
+                        <div class="form-group">
+                            <input hidden autocomplete="off" class="form-control" name="confirm" placeholder="Confirm Password" type="text" autocapitalize="off" autocorrect="off">
+                        </div>
+                        <div class="form-group">
+                            <label hidden for="img">Select Profile Image: </label>
+                            <input hidden type="file" id="pro_img" name="profile_image" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label hidden for="img">Select Aadhar Card Image: </label>
+                            <input hidden type="file" id="aad_img" name="aadhar_image" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->
+</div>
+
+<script>
+    function ShowPass() {
+        var x = document.getElementById("pass");
+        if (x.type === "password") {
+        x.type = "text";
+        } else {
+        x.type = "password";
+        }
+    }
+</script>
+{% endblock %}

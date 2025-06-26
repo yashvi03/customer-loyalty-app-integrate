@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+<div class="row">
+    <div class="col-sm-12">
+        <br>
+        <h3 class="text-dark text-center">Ledger</h3>
+        <div class="table-responsive">
+            <table class="table user-table" id="ledger">
+            {% if session_type == 1 %}
+                <input type="text" class="form-control" id="ledger_i" onkeyup="name_filter()" placeholder="Search by plumber name..." style="width: 100%;">
+            {% endif %}
+                <thead>
+                    <tr>
+                        <th class="border-top-0">Date</th>
+                        {% if session_type == 1 %}
+                            <th class="border-top-0">Plumber</th>
+                        {% elif session_type == 2 %}
+                            <th class="border-top-0">Store</th>
+                        {% endif %}
+                        <th class="border-top-0">Amount</th>
+                        <th class="border-top-0">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in ledger %}
+                        <tr>
+                            {% if row.points_received or row.points_allocated or row.points_redeemable or row.points_expired %}
+                                <td>{{ row.date }}</td>
+                            {% endif %}
+                            {% if not row.name and not row.store_name and (row.points_allocated or row.points_expired) %}
+                                {% if row.points_allocated %}
+                                    {% if row.points_allocated < 0 %}
+                                        <td style="word-break:break-all; color:royalblue;">Sales Return to Puranmal Sons</td>
+                                    {% else %}
+                                        <td style="word-break:break-all; color:green;">Received from Puranmal Sons</td>
+                                    {% endif %}
+                                {% elif row.points_expired %}
+                                    <td style="word-break:break-all; color:royalblue;">Points Expired</td>
+                                {% endif %}
+                            {% elif row.tr_id and row.sd_id and row.store_name and row.points_allocated %}
+                                {% if is_sd == "1" %}
+                                    <td style="word-break:break-all; color:green;">Received from {{ row.store_name }}</td>
+                                {% else %}
+                                    <td style="word-break:break-all; color:red;">Given to {{ row.store_name }}</td>
+                                {% endif %}
+                            {% else %}
+                                {% if session_type == 1 %}
+                                    {% if row.points_received %}
+                                        {% if row.points_received > 0 %}
+
+                                            {% if row.store_name and is_sd != "1" %}
+                                                <td style="word-break:break-all; color:red;">Given to {{ row.store_name }}</td>
+                                            {% else %}
+                                                <td style="word-break:break-all; color:red;">Given to {{ row.name }} {{ row.surname }}</td>
+                                            {% endif %}
+                                        {% elif row.points_received < 0 and not row.sd_id %}
+                                            {% if row.store_name %}
+                                                {% if is_sd == "1" %}
+                                                    <td style="word-break:break-all; color:green;">Material return from {{ row.name }} {{ row.surname }}</td>
+                                                {% else %}
+                                                    <td style="word-break:break-all; color:green;">Material return from {{ row.store_name }}</td>
+                                                {% endif %}
+                                            {% else %}
+                                                <td style="word-break:break-all; color:green;">Material return from {{ row.name }} {{ row.surname }}</td>
+                                            {% endif %}
+                                        {% elif row.points_received < 0 and row.sd_id %}
+                                            {% if is_sd == "1" %}
+                                                <td style="word-break:break-all; color:red;">Material return to {{ row.store_name }}</td>
+                                            {% else %}
+                                                <td style="word-break:break-all; color:green;">Material return from {{ row.store_name }}</td>
+                                            {% endif %}
+                                        {% elif row.points_received == 0 %}
+                                            <td style="word-break:break-all;">Invalid Transaction</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% elif session_type == 2 %}
+                                    {% if row.points_received %}
+                                        {% if row.points_received > 0 %}
+                                            <td style="word-break:break-all; color:green;">Received from {{ row.store_name }}</td>
+                                        {% elif row.points_received < 0 %}
+                                            <td style="word-break:break-all; color:red;">Material return to {{ row.store_name }}</td>
+                                        {% elif row.points_received == 0 %}
+                                            <td style="word-break:break-all;">Invalid Transaction</td>
+                                        {% endif %}
+                                    {% elif row.points_redeemable %}
+                                        {% if row.points_redeemable < 0 %}
+                                            <td style="word-break:break-all; color:red;">Received Gift from Puranmal Sons</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                            {% if row.points_received or row.points_allocated or row.points_redeemable or row.points_expired %}
+                                {% if not row.amount %}
+                                    <td> - </td>
+                                {% else %}
+                                    <td>&#x20B9;{{ row.amount }}</td>
+                                {% endif %}
+                            {% endif %}
+                            {% if session_type == 1 %}
+                                {% if row.points_allocated %}
+                                    {% if row.tr_id and row.sd_id and row.store_name and row.points_allocated %}
+                                        {% if is_sd == "1" %}
+                                            <td style="color:green; font-weight: bold;">{{ row.points_allocated }}</td>
+                                        {% else %}
+                                            <td style="color:red; font-weight: bold;">{{ -row.points_allocated }}</td>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if row.points_allocated < 0 %}
+                                            <td style="color:royalblue; font-weight: bold;">{{ row.points_allocated }}</td>
+                                        {% else %}
+                                            <td style="color:green; font-weight: bold;">{{ row.points_allocated }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% elif row.points_received %}
+                                    {% if row.points_received > 0 %}
+                                        <td style="color:red; font-weight: bold;">-{{ row.points_received }}</td>
+                                    {% elif row.points_received < 0 %}
+                                        {% if not row.sd_id %}
+                                            <td style="color:green; font-weight: bold;">{{ -row.points_received }}</td>
+                                        {% elif is_sd == "1" %}
+                                            <td style="color:red; font-weight: bold;">{{ row.points_received }}</td>
+                                        {% else %}
+                                            <td style="color:green; font-weight: bold;">{{ -row.points_received }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% elif row.points_expired %}
+                                    <td style="color:royalblue; font-weight: bold;">-{{ row.points_expired }}</td>
+                                {% endif %}
+                            {% elif session_type == 2 %}
+                                {% if row.points_received %}
+                                    {% if row.points_received > 0 %}
+                                        <td style="color:green; font-weight: bold;">{{ row.points_received }}</td>
+                                    {% elif row.points_received < 0 %}
+                                        <td style="color:red; font-weight: bold;">{{ row.points_received }}</td>
+                                    {% endif %}
+                                {% elif row.points_redeemable %}
+                                    {% if row.points_redeemable < 0 %}
+                                    <td style="color:red; font-weight: bold;">{{ row.points_redeemable }}</td>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <script>
+        function name_filter() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("ledger_i");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("ledger");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+{% endblock %}   

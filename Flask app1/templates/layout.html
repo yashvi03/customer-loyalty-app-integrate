@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&family=Kalam:wght@300&family=Khula:wght@600&family=Laila:wght@400;700&family=Martel:wght@400;900&display=swap" rel="stylesheet">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ZBPME637Y"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-1ZBPME637Y');
+        </script>
+        <style>
+            .loader-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #242f3f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+            .loader {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 250px;
+            border: 4px solid #Fff;
+            animation: loader 2s infinite ease;
+            }
+            .loader-inner {
+            vertical-align: top;
+            display: inline-block;
+            width: 100%;
+            background-color: #fff;
+            animation: loader-inner 2s infinite ease-in;
+            }
+            @keyframes loader {
+            0% { transform: rotate(0deg);}
+            25% { transform: rotate(180deg);}
+            50% { transform: rotate(180deg);}
+            75% { transform: rotate(360deg);}
+            100% { transform: rotate(360deg);}
+            }
+            @keyframes loader-inner {
+            0% { height: 0%;}
+            25% { height: 0%;}
+            50% { height: 100%;}
+            75% { height: 100%;}
+            100% { height: 0%;}
+            }
+            .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+            height:100%;
+            @import "lesshat";
+            }
+        </style>
+        
+        
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+        
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="/static/logo2.png" rel="icon">
+
+        <link href="/static/styles.css" rel="stylesheet">
+        <link href="/static/bootstrap-select.css" rel="stylesheet">
+        <link href="/static/bootstrap-select.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/static/chartist.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/style.min.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+        
+        <!-- <script src="/static/js/bootstrap.min.js"></script> -->
+        <!-- <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script> -->
+        <script src="/static/js/popper.min.js"></script>
+        <script src="/static/js/app-style-switcher.js"></script>
+        <script src="/static/js/waves.js"></script>
+        <script src="/static/js/sidebarmenu.js"></script>
+        <script src="/static/js/custom.js"></script>
+        <script src="/static/js/jquery.flot.js"></script>
+        <script src="/static/js/jquery.flot.tooltip.min.js"></script>
+        <script src="/static/js/dashboard1.js"></script>
+
+        <script>
+            $(window).on("load",function(){
+                $(".loader-wrapper").fadeOut("slow");
+            });
+        </script>
+
+        <title>Puranmal Sons : {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body style="background-color: whitesmoke; font-family: 'Raleway', sans-serif;">
+        <!-- <div id="loader"></div> -->
+            <!-- <div style="display:none;" id="myDiv" class="animate-bottom"> -->
+                <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+                    <!-- ============================================================== -->
+                    <!-- Topbar header - style you can find in pages.scss -->
+                    <!-- ============================================================== -->
+                    <header class="topbar fixed-top" data-navbarbg="skin6">
+                        <nav class="navbar top-navbar navbar-expand-md navbar-dark fixed-top">
+                            <div class="navbar-header" data-logobg="skin6">
+                                <!-- ============================================================== -->
+                                <!-- Logo -->
+                                <!-- ============================================================== -->
+                                <a class="navbar-brand" href="/">
+                                    <!-- Logo icon -->
+                                    <b class="logo-icon">
+                                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                        <!-- Dark Logo icon -->
+                                        <img src="/static/logo2.png" alt="homepage" class="dark-logo">
+
+                                    </b>
+                                    <!--End Logo icon -->
+                                    <!-- Logo text -->
+                                    <span class="logo-text">
+                                        
+                                        <img src="/static/name3.png" alt="homepage" class="dark-logo">
+                                        <!-- Puranmal Sons Plumbing Network -->
+                                    </span>
+                                </a>
+                                <!-- ============================================================== -->
+                                <!-- End Logo -->
+                                <!-- ============================================================== -->
+                                <!-- ============================================================== -->
+                                <!-- toggle and nav items -->
+                                <!-- ============================================================== -->
+                                {% if session.login %}
+                                    <a id="nav-toggle" class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" data-placement="right" data-position="fixed" href="javascript:void(0)">
+                                        <i class="ti-close ti-menu">
+                                        </i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- End Logo -->
+                            <!-- ============================================================== -->
+                            {% if session.login %}
+                                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                                    <ul class="navbar-nav d-none d-md-block d-lg-none">
+                                        <li class="nav-item">
+                                            <a class="nav-toggler nav-link waves-effect waves-light text-white" data-placement="right" data-position="fixed" href="javascript:void(0)">
+                                                <i class="ti-close ti-menu"></i>
+                                            </a>
+                                            
+                                        </li>
+                                    </ul>
+                                    
+                                    <!-- ============================================================== -->
+                                    <!-- toggle and nav items -->
+                                    <!-- ============================================================== -->
+                                    {% if session.login %}
+                                        <ul class="navbar-nav ml-auto mt-2">
+                                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                                        </ul>
+                                    {% else %}
+                                        <ul class="navbar-nav ml-auto mt-2">
+                                            <li class="nav-item"><a class="nav-link" href="/request_OTP">Register</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                                        </ul>
+                                    {% endif %}
+                                    <!-- ============================================================== -->
+                                    <!-- Right side toggle and nav items -->
+                                    <!-- ============================================================== -->
+                                    <ul class="navbar-nav mt-2">
+                                        <!-- ============================================================== -->
+                                        <!-- User profile and search -->
+                                        <!-- ============================================================== -->
+                                        {% if session["photo"] %}
+                                            <li class="nav-item dropdown">
+                                                {% if session["type"] == 0 %}
+                                                    <a class="nav-link dropdown-toggle waves-effect waves-dark"><img src="{{ url_for('download', filename=session['photo']) }}" alt="user" class="profile-pic mr-2">{{ session["name"] }} {{ session["surname"] }}</a>
+                                                {% elif session["type"] == 1 %}
+                                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="/trader_profile/{{ session['user_id'] }}"><img href="/trader_profile/{{ session['user_id'] }}" src="{{ url_for('download', filename=session['photo']) }}" alt="user" class="profile-pic mr-2">{{ session["store_name"] }}</a>
+                                                {% elif session["type"] == 2 %}
+                                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="/plumber_profile/{{ session['user_id'] }}"><img href="/plumber_profile/{{ session['user_id'] }}" src="{{ url_for('download', filename=session['photo']) }}" alt="user" class="profile-pic mr-2">{{ session["name"] }} {{ session["surname"] }}</a>
+                                                {% endif %}
+                                            </li>               
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </nav>
+                    </header>
+                    {% if session.login %}
+                    <section id="pmd-main">
+                        <aside class="left-sidebar position-fixed fixed-right" style="float: right" data-sidebarbg="skin6">
+                            <!-- Sidebar scroll -->
+                            <div class="scroll-sidebar">
+                                <!-- Sidebar navigation -->
+                                <nav class="sidebar-nav">
+                                    <ul id="sidebarnav" class="in">
+                                        {% if session["type"] == 0 %}
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Home</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="https://puranmalsons-quotation-webapp-0b4c571a2cc2.herokuapp.com/" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Quotation</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/trader_register" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Register Trader</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/subdealer_register" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Register Sub-dealer</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/plumber_register" aria-expanded="false">
+                                                    <!-- <i class="mr-3 fa fa-hard-hat" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Register Plumber</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/bulk_plumbers_register" aria-expanded="false">
+                                                    <!-- <i class="mr-3 fa fa-hard-hat" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Bulk Plumber Register</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/trpl" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-font" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Plumber to Trader</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/gift_status" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-columns" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Gift Status</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/profiles" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Profiles</span></a>
+                                            </li>
+                                        {% elif session["type"] == 3 %}
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Home</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/leaderboard" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Top Plumbers</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/gifts" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-globe" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Gifts Table</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/gift_status" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-columns" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Gift Status</span></a>
+                                            </li>
+                                        {% elif session["type"] == 1 %}
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">Home</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/transfer" aria-expanded="false">
+                                                <span class="hide-menu">Points to Plumber</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/sales_return" aria-expanded="false">
+                                                <span class="hide-menu">Plumber Material Return</span></a>
+                                            </li>
+                                            {% if not session["subdealer"] %}
+                                                <li class="sidebar-item">
+                                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/transfer_subdealer" aria-expanded="false">
+                                                    <span class="hide-menu">Points to Dealer</span></a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/sales_return_subdealer" aria-expanded="false">
+                                                    <span class="hide-menu">Dealer Material Return</span></a>
+                                                </li>
+                                            {% endif %}
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ledger" aria-expanded="false">
+                                                <span class="hide-menu">View Points Ledger</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/gifts" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu">View Gifts</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/trader_profile/{{ session['user_id'] }}">
+                                                <span class="hide-menu">{{ session["store_name"] }}</span></a>
+                                            </li>
+                                        {% elif session["type"] == 2 %}
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">होम स्क्रीन</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item"> 
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/leaderboard" aria-expanded="false">
+                                                <!-- <i class="mr-3 far fa-clock fa-fw" aria-hidden="true"></i> -->
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">टौप प्लंबर</span></a>                                
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/gifts" aria-expanded="false">
+                                                <!-- <i class="mr-3 fa fa-user" aria-hidden="true"></i> -->
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">पुरस्कार मांगें</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/ledger" aria-expanded="false">
+                                                    <!-- <i class="mr-3 fa fa-hard-hat" aria-hidden="true"></i> -->
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">पॉइंट लेज़र देखें</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/plumber_profile/{{ session['user_id'] }}" aria-expanded="false">
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">{{ session["name"] }} {{ session["surname"] }}</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout" aria-expanded="false">
+                                                <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">लॉग आउट</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-item waves-effect waves-dark sidebar-link" href="https://wa.me/918817408339" target="_blank" aria-expanded="false">
+                                                    <span class="hide-menu" style="font-family: 'Kalam', serif; font-size: 27px;">सहायता केंद्र</span></a>
+                                            </li>
+                                        {% endif %}
+                                        {% if session["type"] == 0 or session["type"] == 1 or session["type"] == 3%}
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout" aria-expanded="false">
+                                                <span class="hide-menu">Log Out</span></a>
+                                            </li>
+                                            <li class="sidebar-item">
+                                                <a class="sidebar-item waves-effect waves-dark sidebar-link" href="https://wa.me/918817408339" target="_blank" aria-expanded="false">
+                                                    <span class="hide-menu">Help Center</span></a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                                <!-- End Sidebar navigation -->
+                            </div>
+                            <!-- End Sidebar scroll-->
+                        </aside>
+                    </section>
+                    {% endif %}
+
+
+                    <!-- <main class="container p-5">
+                    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full"> -->
+                    <div class="page-wrapper" style="background-color: whitesmoke;">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% if session["user_id"] == 2 %}
+                                    <ul class="alert alert-primary border text-center" style="list-style-type: none; font-family: 'Kalam', serif; font-size: 18px;">
+                                {% else %}
+                                    <ul class="alert alert-primary border text-center" style="list-style-type: none; font-size: 18px;">
+                                {% endif %}
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                                 </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <!-- {% if get_flashed_messages() %}
+                        <header>
+                            <div class="alert alert-primary border text-center" role="alert">
+                                {{ get_flashed_messages() | join(" ") }}
+                            </div>
+                        </header>
+                    {% endif %} -->
+                    {% block main %}{% endblock %}
+                    </div>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- </main> -->
+        <div id="load" class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+
+        <footer class="small text-center text-muted" style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; background-color: whitesmoke;">
+            &#169; Created with brains at <a href="https://palrigraphy.com">palrigraphy</a> &#8482;
+        </footer>
+        
+    </body>
+    <script type="text/javascript">
+        $(window).on('beforeunload', function () {
+            $("input[type=submit], input[type=button]").prop("disabled", "disabled");
+        });
+        // $(document).ready(function() {
+        //     resetButton();
+        //     $("#create-sheet-form").on('submit', function(event) {
+        //     $("#create-sheet-btn").prop("disabled", true).text("Creating New Sheet...");
+        //     });
+        // });
+        // window.addEventListener('pageshow', function(event) {
+        //     if (event.persisted) {resetButton();}
+        // });
+        // function resetButton() {
+        //      $("#create-sheet-btn").prop("disabled", false).text("Create New Sheet");
+        // }
+        $(document).ready(function() {
+            $("form").on('submit', function() {
+                $(this).find("input[type=submit], input[type=button]").prop("disabled", true);
+                $(".loader-wrapper").fadeIn();
+                return true;
+            });
+            $("a").on('click', function(event) {
+                const href = $(this).attr('href');
+                if (href && href !== '#') {
+                    event.preventDefault(); 
+                    $(".loader-wrapper").fadeIn();
+                    setTimeout(function() {
+                        window.location.href = href;
+                    }, 100); 
+                }
+            });
+            $(window).on('load', function() {
+                $(".loader-wrapper").fadeOut();
+            });
+            $(window).on('beforeunload', function() {
+                $(".loader-wrapper").fadeIn();
+            });
+        });
+    </script>
+    <!-- <script>
+        $(':button').prop('disabled', true);
+    </script>
+    <script>
+        window.onbeforeunload = function () {
+            var inputs = document.getElementsByTagName("INPUT");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "button" || inputs[i].type == "submit") {
+                    inputs[i].disabled = true;
+                }
+            }
+        };
+    </script>
+    <script>
+        window.onbeforeunload = function () {
+            var inputs = document.getElementsByTagName("BUTTON");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "button" || inputs[i].type == "submit") {
+                    inputs[i].disabled = true;
+                }
+            }
+        };
+    </script> -->
+
+</html>

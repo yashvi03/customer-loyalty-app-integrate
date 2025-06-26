@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <!-- <div class="container-fluid"> -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <br>
+        <h3 class="text-dark text-center" style="font-family: 'Kalam', serif; font-size: 30px;">टौप प्लंबर</h3>
+        {% if session["type"] == 2 %}
+        <h4 class="text text-center" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px; color: #ff0000;">आपकी रैंक : {{ rank }}</h4>
+        {% endif %}
+        <div class="row">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table user-table" style="table-layout: fixed; border: 3px solid #ff913c" id="gifts">
+                        <thead>
+                            <tr style="border-bottom: 3px solid #ff913c;">
+                                <th class="border-top-0" style="text-align: center; font-family: 'Kalam', serif; font-size: 20px;">रैंक</th>
+                                <th class="border-top-0" style="font-family: 'Kalam', serif; font-size: 20px;">पौइंट्स</th>
+                                <th class="border-top-0" style="font-family: 'Kalam', serif; font-size: 20px;">नाम</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in leaderboard %}
+                            <tr style="border-bottom: 3px solid #ff913c;">
+                                {% if row[0] == 0 %}
+                                    <td style="text-align: center; font-style: italic; font-size:60px; font-weight: bold; color: goldenrod; background-color: darkblue;">{{ row[0] + 1 }}</td>
+                                    <td style="font-style: italic; font-weight: bold; color: goldenrod; background-color: darkblue;">{{ row[6] }}</td>
+                                    <td style="font-style: italic; font-weight: bold; color: goldenrod; background-color: darkblue;">{{ row[1] }} {{ row[2] }}, {{ row[3] }}</td>
+                                {% elif row[0] == 1 %}
+                                    <td style="text-align: center; font-style: italic; font-size:45px; font-weight: normal; color: silver; background-color: purple;">{{ row[0] + 1 }}</td>
+                                    <td style="font-style: italic; font-weight: normal; color: silver; background-color: purple;">{{ row[6] }}</td>
+                                    <td style="font-style: italic; font-weight: normal; color: silver; background-color: purple;">{{ row[1] }} {{ row[2] }}, {{ row[3] }}</td>
+                                {% elif row[0] == 2 %}
+                                    <td style="text-align: center; font-style: italic; font-size:30px; font-weight: light; color: brown; background-color: lightblue;">{{ row[0] + 1 }}</td>
+                                    <td style="font-style: italic; font-weight: light; color: brown; background-color: lightblue;">{{ row[6] }}</td>
+                                    <td style="font-style: italic; font-weight: light; color: brown; background-color: lightblue;">{{ row[1] }} {{ row[2] }}, {{ row[3] }}</td>
+                                {% else %}
+                                    <td style="text-align: center;">{{ row[0] + 1 }}</td>
+                                    <td>{{ row[6] }}</td>
+                                    <td>{{ row[1] }} {{ row[2] }}, {{ row[3] }}</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+            
+{% endblock %}   

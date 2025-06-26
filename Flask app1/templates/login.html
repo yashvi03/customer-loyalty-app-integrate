@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12">
+                <!-- <h3 class="text-center" style="color: rgb(111,100,230); font-family: 'Times New Roman', serif">WELCOME TO</h3> -->
+                <h3 class="text text-center" style="color: #ff913c; font-family: 'Laila', sans-serif; font-size: 30px;">स्वागत है,</h3>
+                <h3 class="text text-center" style="color: #ff913c; font-family: 'Kalam', serif; font-size: 27px;">मध्य भारत के सबसे बड़े</h3>
+                <h3 class="text text-center" style="color: #ff913c; font-family: 'Laila', serif; font-size: 30px;">प्लंबिंग नेटवर्क में।</h3>
+                <div class="card">
+                    <div class="card-body" style="padding: 1.25rem;">
+                        <form action="/login" method="post">
+                            <div class="form-group">
+                                <input autocomplete="on" autofocus class="form-control" name="phone" placeholder="पंजीकृत फोन नंबर" type="number">
+                            </div>
+                            <div class="form-group">
+                                <input id="pass" class="form-control" name="password" placeholder="पासवर्ड" type="password">
+                                <br>
+                                <label for="show">
+                                    <input id="show" type="checkbox" onclick="ShowPass()">
+                                    <label for="show" class="text text-center" style="color: #000000; font-family: 'Khula', sans-serif;"> पासवर्ड दीखाओ</label>
+                                </label>
+                            </div>
+                            <input class="btn btn-primary" style="font-family: 'Khula', sans-serif; font-size: 18px; padding-top: 9px;" type="submit" value="लॉग इन करें">
+                        </form>
+                        <br>
+                        <a href="/request_OTP" class="text text-center" style="font-family: 'Khula', sans-serif;">पासवर्ड भूल गए?</a>
+                    </div>
+                </div>
+                <a href="https://wa.me/918817408339" target="_blank">
+                    <input type="submit" class="btn btn-primary" aria-expanded="false" value="सहायता केंद्र">
+                </a>
+                    <!-- <span style="font-family: 'Khula', sans-serif;">सहायता केंद्र</span> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowPass() {
+            var x = document.getElementById("pass");
+            if (x.type === "password") {
+            x.type = "text";
+            } else {
+            x.type = "password";
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Plumber Registration History
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <br>
+        <h3 class="text-dark text-center">Bulk Plumber Registration History</h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table user-table" id="plumber_registration_history">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Sheet URL</th>
+                                        <th class="border-top-0">Date Created</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in history %}
+                                            <tr>
+                                                <td><a href="{{ row.sheet_url }}" target="_blank">{{ row.sheet_url }}</a></td>
+                                                <td>{{ row.date_created }}</td>
+                                            </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
+{% endblock %}

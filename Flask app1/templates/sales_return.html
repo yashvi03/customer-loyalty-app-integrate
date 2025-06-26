@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Puranmal Sons Plumbing Network
+{% endblock %}
+
+{% block main %}
+    {% if notif %}
+        <p class="alert alert-primary border text-center"><strong>{{ notif }}</strong></p>
+    {% endif %}
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <br>
+            <h3 class="text-dark text-center">Material Return</h3>
+            <form enctype=multipart/form-data action="/sales_return" method="post">
+                <div class="form-group">
+                    <select class="selectpicker form-control" name="plumber" id="plumber" data-live-search="true" onchange="max_points()" required>
+                        <option disabled selected value>Select Plumber</option>
+                        {% for plumber in plumbers %}
+                            <option value="{{ plumber.id }}" style="
+                            /* wrap text in compatible browsers */
+                            -moz-white-space: pre-wrap;
+                            -o-white-space: pre-wrap;
+                            white-space: pre-wrap;
+                            /* hide text that can't wrap with an ellipsis */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            /* add border after every option */
+                            border-bottom: 1px solid #DDD;
+                            ">{{ plumber.name }} {{ plumber.surname }} {{ plumber.phone}}</option>
+                        {% endfor %}
+                    </select>
+                    {% if session["subdealer"] %}
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="amount" onkeyup="calc1()" placeholder="Bill Amount" type="number" min="0" id="amount" required>
+                        </div>
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="points" placeholder="Points" type="number" id="points" max="{{ max_points }}" required>
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="amount" onkeyup="calc()" placeholder="Bill Amount" type="number" min="0" id="amount" required>
+                        </div>
+                        <div class="form-group">
+                            <input autocomplete="off" class="form-control" name="points" placeholder="Points" type="number" id="points" required>
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Submit Return">
+                    </div>
+            </form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            var amount = document.getElementById('amount').value;
+            
+            document.getElementById('points').value = Math.floor(amount * 0.02119);
+        }    
+    </script>
+    <script>
+        function calc1() {
+            var amount = document.getElementById('amount').value;
+            
+            document.getElementById('points').value = Math.floor(amount * 0.0195686);
+        }    
+    </script>
+    <script>
+        function max_points(){
+            var pl_id=document.getElementById('plumber').value;
+            pts = {{ pl_pts | tojson }};
+            var pl_pts = eval('[' + pts + ']');
+            document.getElementById('points').max = pl_pts[0][pl_id].points_available;
+            
+            }
+    </script>
+{% endblock %}
