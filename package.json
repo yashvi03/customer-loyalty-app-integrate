@@ -1,0 +1,9 @@
+{
+  "name": "plumberBhai-app",
+  "version": "1.0.0",
+  "description": "plumber bhai app",
+  "scripts": {
+    "heroku-postbuild": "cd React_app && npm install && npm run build"
+  },
+  "license": "ISC"
+}
