@@ -60,7 +60,7 @@ const Home = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        "https://puranmalsons-quotation-webapp-0b4c571a2cc2.herokuapp.com/api/create_quotation",
+        "https://puranmalsons-quotation-webapp-0b4c571a2cc2.herokuapp.com/api2/create_quotation",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

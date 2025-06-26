@@ -1,0 +1,10 @@
+# Procfile.local (Corrected for Windows development with your folder names)
+
+# Use the Windows-compatible "flask run" command for the first app.
+app1: cd Flask_app1 && set FLASK_APP=app:app && flask run --port 8001
+
+# Use "flask run" for the second app as well.
+app2: cd Flask_app2 && set FLASK_APP=run:app && flask run --port 8002
+
+# Use npm.cmd for the React app for better Windows compatibility.
+react: cd React app && npm.cmd run dev
