@@ -5,5 +5,8 @@
   "scripts": {
     "heroku-postbuild": "cd React_app && npm install && npm run build"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.6.0"
+  }
 }

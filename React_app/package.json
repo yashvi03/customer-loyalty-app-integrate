@@ -27,11 +27,7 @@
     "react-scroll": "^1.9.3",
     "react-to-print": "^3.0.5",
     "select2": "^4.1.0-rc.0",
-    "tailwindcss": "^4.0.6",
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.1.0"
-
-
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
