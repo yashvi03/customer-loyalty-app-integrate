@@ -32,7 +32,7 @@ requests==2.25.0
 six
 SQLAlchemy==1.4.16
 urllib3==1.25.11
-Werkzeug==1.0.1
+werkzeug==2.0.3
 gunicorn
 apscheduler
 boto3
