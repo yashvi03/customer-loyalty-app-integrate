@@ -1,2 +1,46 @@
+# .gitignore
+
+# Environment variables - NEVER commit secrets
 .env
-.venv
+*.env
+.env.*
+env.p
+
+# Python - Ignore virtual environments, cache, and compiled files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS - Ignore system files
+.DS_Store
+
+# Node / React - CRITICAL: Ignore the massive node_modules folder
+# and build artifacts. Heroku will build this for you.
+node_modules/
+React_app/node_modules/
+/build
+/dist
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / Editor specific files
+.idea/
+.vscode/
+
+# Database Dumps / Backups - Do not commit large data files
+*.dump
+*.sql
+*.csv
+
+# Temporary migration tool files (we want to keep the main ones)
+/transfer_data.py
+
+# Exception for your one data file if you NEED to commit it
+# (Uncomment the line below ONLY if you absolutely must include
+# new_data.csv in your repository for a one-time script)
+# !new_data.csv
