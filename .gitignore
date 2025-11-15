@@ -36,6 +36,7 @@ yarn-error.log*
 *.dump
 *.sql
 *.csv
+*.json
 
 # Temporary migration tool files (we want to keep the main ones)
 /transfer_data.py
