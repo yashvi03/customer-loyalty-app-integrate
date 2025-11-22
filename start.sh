@@ -1,17 +1,16 @@
 #!/bin/bash
-# This script starts the services for the combined app on Heroku.
 
-# 1. Start Nginx in the background.
+# Process the nginx.conf.erb template to replace <%= ENV["PORT"] %>
+erb nginx.conf.erb > /tmp/nginx.conf
+
+# Start Nginx with the processed config
 echo "Starting Nginx..."
-nginx -c /app/nginx.conf.erb &
+nginx -c /tmp/nginx.conf &
 
-# 2. Start the Gunicorn server for the first Flask app in the background.
-# We use --chdir to tell Gunicorn where the app is, instead of using 'cd'.
-# We use 'python -m gunicorn' to ensure the command is found.
+# Start Gunicorn for Flask_app1
 echo "Starting Gunicorn for App 1..."
 python -m gunicorn --bind 0.0.0.0:8001 --workers 2 --chdir ./Flask_app1 app:app &
 
-# 3. Start the Gunicorn server for the second Flask app in the FOREGROUND.
-# This is the command that keeps the dyno alive.
+# Start Gunicorn for Flask_app2 (foreground - keeps dyno alive)
 echo "Starting Gunicorn for App 2..."
 python -m gunicorn --bind 0.0.0.0:8002 --workers 2 --chdir ./Flask_app2 run:app
