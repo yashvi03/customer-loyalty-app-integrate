@@ -7,7 +7,17 @@ events {
 }
 
 http {
-  include       /etc/nginx/mime.types;
+  # include       /etc/nginx/mime.types;
+  types {
+    text/html                             html htm shtml;
+    text/css                              css;
+    application/javascript                js;
+    application/json                      json;
+    image/jpeg                            jpeg jpg;
+    image/png                             png;
+    image/gif                             gif;
+    image/svg+xml                         svg svgz;
+  }
   default_type  application/octet-stream;
   access_log /dev/stdout;
   sendfile on;
