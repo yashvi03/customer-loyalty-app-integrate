@@ -1,2 +1,3 @@
 -r Flask_app1/requirements.txt
--r Flask_app2/requirements.txtpsycopg2-binary
+-r Flask_app2/requirements.txt
+psycopg2-binary
