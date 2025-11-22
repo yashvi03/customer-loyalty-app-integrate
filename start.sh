@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Create required nginx directories
+mkdir -p /tmp/nginx/logs
+mkdir -p /tmp/nginx/client_body_temp
+mkdir -p /tmp/nginx/proxy_temp
+mkdir -p /tmp/nginx/fastcgi_temp
+mkdir -p /tmp/nginx/uwsgi_temp
+mkdir -p /tmp/nginx/scgi_temp
+
 # Process the nginx.conf.erb template to replace <%= ENV["PORT"] %>
 erb nginx.conf.erb > /tmp/nginx.conf
 
