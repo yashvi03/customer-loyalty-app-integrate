@@ -24,6 +24,8 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from sqlalchemy.exc import SQLAlchemyError
 from flask_migrate import Migrate
+from Flask_app1.extensions import db, migrate
+
 
 from Flask_app1.db_update import update_invoices, update_redeemable, update_traders, update_sr #, update_expiry
 
@@ -64,7 +66,7 @@ app.config["MAX_CONTENT_LENGTH"] = 10240 * 10240
 app.config["UPLOAD_EXTENSIONS"] = [".jpg", ".png", ".jpeg"]
 s = Session(app)
 
-db = SQLAlchemy(app)
+db.init_app(app)
 migrate = Migrate(app, db, directory='Flask_app1/migrations')
 from Flask_app1.models import Gifts, Office, Traders, Plumbers, Transactions, Redemption, TRPL, Admin, Bulk_Plumber_Registration_History
 
