@@ -68,10 +68,19 @@ db = SQLAlchemy(app)
 from Flask_app1.models import Gifts, Office, Traders, Plumbers, Transactions, Redemption, TRPL, Admin, Bulk_Plumber_Registration_History
 
 # Path to the credentials file stored in the instance folder
-credentials_file = os.path.join(app.instance_path, 'credentials.json')
+# credentials_file = os.path.join(app.instance_path, 'credentials.json')
+
+import json
+import os
+from google.oauth2 import service_account
+
+creds_json = os.environ.get('GOOGLE_CREDENTIALS')
+if creds_json:
+    creds_info = json.loads(creds_json)
+    creds = service_account.Credentials.from_service_account_info(creds_info)
 
 # Initialize the credentials
-creds = Credentials.from_service_account_file(credentials_file)
+# creds = Credentials.from_service_account_file(credentials_file)
 
 # Set up the Google Sheets API and Google Drive API services
 drive_service = build('drive', 'v3', credentials=creds)
