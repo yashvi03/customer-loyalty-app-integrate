@@ -25,7 +25,7 @@ from googleapiclient.discovery import build
 from sqlalchemy.exc import SQLAlchemyError
 from flask_migrate import Migrate
 
-from db_update import update_invoices, update_redeemable, update_traders, update_sr #, update_expiry
+from Flask_app1.db_update import update_invoices, update_redeemable, update_traders, update_sr #, update_expiry
 
 
 
