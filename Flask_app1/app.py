@@ -65,6 +65,7 @@ app.config["UPLOAD_EXTENSIONS"] = [".jpg", ".png", ".jpeg"]
 s = Session(app)
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 from Flask_app1.models import Gifts, Office, Traders, Plumbers, Transactions, Redemption, TRPL, Admin, Bulk_Plumber_Registration_History
 
 # Path to the credentials file stored in the instance folder
@@ -78,6 +79,10 @@ creds_json = os.environ.get('GOOGLE_CREDENTIALS')
 if creds_json:
     creds_info = json.loads(creds_json)
     creds = service_account.Credentials.from_service_account_info(creds_info)
+else:
+    # Local development: use file
+    credentials_file = os.path.join(app.instance_path, 'credentials.json')
+    creds = Credentials.from_service_account_file(credentials_file)
 
 # Initialize the credentials
 # creds = Credentials.from_service_account_file(credentials_file)
