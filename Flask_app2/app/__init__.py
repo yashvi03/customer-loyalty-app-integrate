@@ -34,7 +34,11 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     logger.debug(f"Set SQLALCHEMY_DATABASE_URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
-
+	
+    uri = app.config['SQLALCHEMY_DATABASE_URI']
+    if uri and uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = uri
     # Test database connection
     logger.debug("Attempting database connection")
     try:
