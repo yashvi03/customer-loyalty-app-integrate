@@ -65,7 +65,7 @@ app.config["UPLOAD_EXTENSIONS"] = [".jpg", ".png", ".jpeg"]
 s = Session(app)
 
 db = SQLAlchemy(app)
-from models import Gifts, Office, Traders, Plumbers, Transactions, Redemption, TRPL, Admin, Bulk_Plumber_Registration_History
+from Flask_app1.models import Gifts, Office, Traders, Plumbers, Transactions, Redemption, TRPL, Admin, Bulk_Plumber_Registration_History
 
 # Path to the credentials file stored in the instance folder
 credentials_file = os.path.join(app.instance_path, 'credentials.json')
