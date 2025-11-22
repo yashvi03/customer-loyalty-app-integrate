@@ -4,7 +4,7 @@ from flask import redirect, render_template, request, session, flash
 from functools import wraps
 import boto3
 import re
-from app import sheets_service, drive_service, db
+from Flask_app1.app import sheets_service, drive_service, db
 from models import Traders, Plumbers,TRPL
 from sqlalchemy.exc import SQLAlchemyError
 import datetime
