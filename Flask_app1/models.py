@@ -1,4 +1,4 @@
-from Flask_app1. app import db
+from Flask_app1.extensions import db
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.sql import func
 
